@@ -2,8 +2,10 @@ package api
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/ksupdev/updev-go-ex-stock-api/db"
 	"github.com/ksupdev/updev-go-ex-stock-api/model"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -23,8 +25,23 @@ func login(c *gin.Context) {
 
 func register(c *gin.Context) {
 	var user model.User
+	var hashError error
 	if c.ShouldBind(&user) == nil {
-		c.JSON(http.StatusOK, gin.H{"result": "register", "data": user})
+
+		user.Password, hashError = hashPassword(user.Password)
+		if hashError != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"status": "Unable to hash password"})
+		}
+
+		user.CreateAt = time.Now()
+
+		if err := db.GetDB().Create(&user).Error; err != nil {
+			c.JSON(http.StatusOK, gin.H{"result": "nok", "error": err})
+		} else {
+			c.JSON(http.StatusOK, gin.H{"result": "OK", "data": user})
+		}
+	} else {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "Unable to bind data"})
 	}
 }
 
