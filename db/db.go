@@ -1,7 +1,6 @@
 package db
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/ksupdev/updev-go-ex-stock-api/model"
 
 	"gorm.io/driver/sqlite"
