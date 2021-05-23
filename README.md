@@ -5,6 +5,9 @@ go workshop
 go mod init github.com/ksupdev/updev-go-ex-stock-api
 go get github.com/gin-gonic/gin
 
+go get gorm.io/driver/sqlite
+go get gorm.io/gorm
+
 ## Feature
 
 - get images => http://localhost:8081/images/go.png
