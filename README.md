@@ -34,3 +34,5 @@ func register(c *gin.Context) {
 	database.AutoMigrate(&model.Product{})
 	database.AutoMigrate(&model.Transaction{})
 ```
+> Gorm auto create table name User => users
+
