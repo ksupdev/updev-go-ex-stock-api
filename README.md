@@ -8,6 +8,8 @@ go get github.com/gin-gonic/gin
 go get gorm.io/driver/sqlite
 go get gorm.io/gorm
 
+go get github.com/dgrijalva/jwt-go
+
 ## Feature
 
 - get images => http://localhost:8081/images/go.png
