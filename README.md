@@ -27,3 +27,10 @@ func register(c *gin.Context) {
 
 }
 ```
+
+- Auto create table structure incase you don't have that table before
+```golang
+	database.AutoMigrate(&model.User{})
+	database.AutoMigrate(&model.Product{})
+	database.AutoMigrate(&model.Transaction{})
+```
