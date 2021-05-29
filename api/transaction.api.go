@@ -21,7 +21,7 @@ func SetupTransactionAPI(router *gin.Engine) {
 
 func getTransaction(c *gin.Context) {
 	var result []TransactionResult
-	db.GetDB().Debug().Raw("SELECT transactions.id, total, paid, change, payment_type, payment_detail, order_list, users.username as Staff, transactions.created_at FROM transactions join users on transactions.staff_id = users.id", nil).Scan(&result)
+	db.GetDB().Debug().Raw("SELECT transactions.id, total, paid, payment_type, payment_detail, order_list, users.username Staff, transactions.created_at FROM transactions join users on transactions.staff_id = users.id", nil).Scan(&result)
 	c.JSON(http.StatusOK, gin.H{"status": "Get transaction", "datas": result})
 }
 

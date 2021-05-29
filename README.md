@@ -5,7 +5,13 @@ go workshop
 go mod init github.com/ksupdev/updev-go-ex-stock-api
 go get github.com/gin-gonic/gin
 
+### driver for SQLite
 go get gorm.io/driver/sqlite
+
+### driver for MYSQL
+go get gorm.io/driver/mysql
+
+### driver for GORM
 go get gorm.io/gorm
 
 go get github.com/dgrijalva/jwt-go
