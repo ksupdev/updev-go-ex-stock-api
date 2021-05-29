@@ -38,3 +38,6 @@ func register(c *gin.Context) {
 ```
 > Gorm auto create table name User => users
 
+
+> strconv.ParseInt(c.PostForm("stock"), 10, 64) กรณีที่ไม่สามารถ convert ได้จะ return 0 มาให้เลย
+
