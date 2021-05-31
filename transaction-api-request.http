@@ -6,7 +6,7 @@ Content-Type: application/json
 
 ### Create Transaction
 POST http://localhost:8081/api/v2/transaction HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjIyNjI5MjksImlkIjoxLCJsZXZlbCI6Im5vcm1hbCIsInVzZXJuYW1lIjoia2Fyb29uIn0.TRbXd1MRXtMIoBQXcb7rFJrjgfTC-j-2ICZbOzoXAcU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjI0MzI3NzQsImlkIjoxLCJsZXZlbCI6Im5vcm1hbCIsInVzZXJuYW1lIjoia2Fyb29uIn0.aek2gz0dzl4kLeUcG4r91Y52NOgVE90MHwW-sa8IShU
 Content-Type: application/json
 
 {

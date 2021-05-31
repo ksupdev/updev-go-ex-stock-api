@@ -11,5 +11,6 @@ type Transaction struct {
 	PaymentDetail string  `json:"payment_detail"`
 	OrderList     string  `json:"order_list"`
 	StaffID       string  `json:"staff_id"`
+	Payload       string  `json:"payload"`
 	CreatedAt     time.Time
 }

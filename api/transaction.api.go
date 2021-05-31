@@ -1,6 +1,8 @@
 package api
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -21,7 +23,10 @@ func SetupTransactionAPI(router *gin.Engine) {
 
 func getTransaction(c *gin.Context) {
 	var result []TransactionResult
-	db.GetDB().Debug().Raw("SELECT transactions.id, total, paid, payment_type, payment_detail, order_list, users.username Staff, transactions.created_at FROM transactions join users on transactions.staff_id = users.id", nil).Scan(&result)
+	db.GetDB().Debug().Raw("SELECT payload, payload CustPayload, transactions.id, total, paid, payment_type, payment_detail, order_list, users.username Staff, transactions.created_at FROM transactions join users on transactions.staff_id = users.id", nil).Scan(&result)
+	var temp model.Transaction
+	json.Unmarshal([]byte(result[1].Payload), &temp)
+	fmt.Println("data = ", temp.ID, " staff = ", temp.StaffID, " paid = ", temp.Paid)
 	c.JSON(http.StatusOK, gin.H{"status": "Get transaction", "datas": result})
 }
 
@@ -31,6 +36,8 @@ func createTransaction(c *gin.Context) {
 	if err := c.ShouldBind(&transaction); err == nil {
 		transaction.StaffID = c.GetString("jwt_staff_id")
 		transaction.CreatedAt = time.Now()
+		pay, _ := json.Marshal(transaction)
+		transaction.Payload = string(pay)
 		db.GetDB().Create(&transaction)
 		c.JSON(http.StatusOK, gin.H{"result": "ok", "data": transaction})
 	} else {
@@ -48,5 +55,7 @@ type TransactionResult struct {
 	PaymentDetail string
 	OrderList     string
 	Staff         string
+	Payload       string
+	CustPayload   string
 	CreateAt      time.Time
 }
